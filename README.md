@@ -1,15 +1,8 @@
 # redisLockDemo
 这个工具类主要用于处理高并发线程使用，示例如下：
 
-
-
-
-
-
-
-
-
- //1.查询该商品库存，为0则活动结束。
+```
+        //1.查询该商品库存，为0则活动结束。
         int stockNum = stock.get(productId);
         if(stockNum == 0) {
             throw new SellException(100,"活动结束");
@@ -25,18 +18,10 @@
             }
             stock.put(productId,stockNum);
         }
-	
-	
-	
-	
-	
+```
 当需要解决并发的时候仅需传入redisLock.lock()和redisLock.unlock()即可
 
-
-
-
-
-
+```
         //加锁
         long time=System.currentTimeMillis()+TIMEOUT;
         if (!redisLock.lock(productId,String.valueOf(time))){
@@ -63,3 +48,4 @@
 
         //解锁
         redisLock.unlock(productId,String.valueOf(time));
+```
